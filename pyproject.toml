@@ -1,10 +1,10 @@
 [project]
 name = "lab"
 authors = [
-    {name = "Alex Maldonado", email = "alex.maldonado@pitt.edu"},
+    {name = "Rafael Ferguson", email = "rafaelvferguson@gmail.com"},
 ]
 maintainers = [
-    {name = "Alex Maldonado", email = "alex.maldonado@pitt.edu"}
+    {name = "Rafael Ferguson", email = "rafaelvferguson@gmail.com"}
 ]
 dynamic = ["version"]
 readme = "README.md"

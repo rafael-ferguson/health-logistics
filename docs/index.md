@@ -1,1 +1,1 @@
-<h1 align="center">BIOSC 1640 - Project</h1>
+<h1 align="center">Health Logistics - Project</h1>

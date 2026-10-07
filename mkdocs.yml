@@ -1,11 +1,11 @@
 docs_dir: docs
 
-site_name: project-template
-site_author: pittbiosc1640
+site_name: health-logistics
+site_author: rafael-ferguson
 
 # Git host
-repo_name: pittbiosc1640/project-template
-repo_url: https://github.com/pittbiosc1640/project-template
+repo_name: rafael-ferguson/health-logistics
+repo_url: https://github.com/rafael-ferguson/health-logistics
 
 # https://squidfunk.github.io/mkdocs-material/
 theme:
@@ -89,8 +89,8 @@ extra:
   generator: true
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/pittbiosc1640
-      name: BIOSC 1640 @ Pitt
+      #link: https://github.com/pittbiosc1640
+      #name: BIOSC 1640 @ Pitt
 
 extra_javascript:
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js

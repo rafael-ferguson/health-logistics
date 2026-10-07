@@ -1,9 +1,9 @@
 [workspace]
 authors = [
-    "Alex Maldonado <alex.maldonado@pitt.edu>",
+    "Rafael Ferguson <rafaelvferguson@gmail.com",
 ]
 channels = ["conda-forge", "bioconda", "nvidia", "pytorch"]
-name = "biosc1640-project"
+name = "health-logistics"
 platforms = ["linux-64", "osx-64", "osx-arm64"]
 version = "26.2.28"
 
