@@ -1,0 +1,76 @@
+[workspace]
+authors = [
+    "Alex Maldonado <alex.maldonado@pitt.edu>",
+]
+channels = ["conda-forge", "bioconda", "nvidia", "pytorch"]
+name = "biosc1640-project"
+platforms = ["linux-64", "osx-64", "osx-arm64"]
+version = "26.2.28"
+
+[system-requirements]
+linux = "4.18"
+libc = { family = "glibc", version = "2.28" }
+macos = "13.0"
+
+[environments]
+dev = ["dev"]
+docs = ["docs"]
+
+[tasks]
+
+[pypi-dependencies]
+lab = { path = ".", editable = true }
+
+[dependencies]
+python = ">=3.12.0,<3.15"
+loguru = ">=0.7.3,<1.0"
+
+[feature.dev.dependencies]
+ruff = ">=0.15.0,<0.18"
+ty = ">=0.0.25,<0.1.0"
+setuptools = ">=82.0.0,<83"
+setuptools-scm = ">=9.2.2,<10"
+wheel = ">=0.46.3,<0.47"
+pytest = ">=9.0.2,<10"
+gh = { version = ">=2.87.2,<3", channel = "conda-forge" }
+bump-my-version = ">=1.2.7,<2"
+click = ">=8.3.1,<9"
+rich = ">=14.3.3,<15"
+
+[feature.dev.tasks]
+lint = { cmd = ["ruff", "check", "--fix", "--config", ".ruff.toml", "./"] }
+format = { depends-on = ["lint"], cmd = ["ruff", "check", "--select", "I", "--fix", "&&", "ruff", "format", "--config", ".ruff.toml", "./"] }
+tests = { cmd = [
+    "PYTHONPATH=.",
+    "pytest",
+    "-c",
+    ".pytest.ini",
+    "--failed-first",
+]}
+check-data = "python -u scripts/data.py check"
+fetch-data = "python -u scripts/data.py fetch"
+compress-data = "python -u scripts/data.py compress"
+publish-data = "python -u scripts/data.py publish"
+bump = { cmd = ["bump-my-version", "bump", "patch"] }
+release = { depends-on = ["compress-data", "bump"], cmd = ["git", "push", "--follow-tags", "&&", "pixi", "run", "publish-data"] }
+
+[feature.docs.dependencies]
+# Will need to migrate to https://zensical.org/ once it matures.
+mkdocs = ">=1.6.1,<2"
+mkdocs-material = ">=9.5.44,<10"
+mkdocstrings = ">=1.0.3,<2"
+mkdocstrings-python = ">=2.0.2,<3"
+mkdocs-macros-plugin = ">=1.5.0,<2"
+mkdocs-glightbox = ">=0.5.2,<0.6"
+mkdocs-git-revision-date-localized-plugin = ">=1.2.9,<2"
+mkdocs-autorefs = ">=1.4.4,<2"
+mkdocs-gen-files = ">=0.6.0,<0.7"
+pymdown-extensions = ">=10.21,<11"
+super-collections = ">=0.6.2,<0.7"
+
+[feature.docs.pypi-dependencies]
+mkdocs-awesome-nav = ">=3.3.0, <4"
+
+[feature.docs.tasks]
+docs = { cmd = ["rm", "-rf", "./public/", "&&", "mkdocs", "build", "-d", "public/"] }
+docs-serve = { cmd = ["mkdocs", "serve"] }

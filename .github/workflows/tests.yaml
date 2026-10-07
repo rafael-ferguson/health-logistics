@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'lab/**'
+      - 'tests/**'
+      - 'pixi.toml'
+      - 'pixi.lock'
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - 'lab/**'
+      - 'tests/**'
+      - 'pixi.toml'
+      - 'pixi.lock'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pixi
+        uses: prefix-dev/setup-pixi@v0.9.4
+        with:
+          locked: false
+          frozen: false
+          cache: true
+          cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
+          activate-environment: true
+
+      - name: Run tests
+        run: pixi run tests
